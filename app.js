@@ -8,21 +8,26 @@ const fav = require("./routes/favourite");
 const order = require("./routes/order");
 require("dotenv").config();
 
-const PORT = process.env.PORT || 3000 ;
+const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-//Connection
+// Connection
 require("./conn/conn");
 
-//Calling Routes
+// Root route
+app.get("/", (req, res) => {
+  res.send("Welcome to the Book Backend!");
+});
+
+// Calling Routes
 app.use("/api/v1", user);
 app.use("/api/v1", book);
 app.use("/api/v1", cart);
 app.use("/api/v1", fav);
 app.use("/api/v1", order);
 
-//SERVER
+// SERVER
 app.listen(PORT, () => {
-  console.log(`Server Started at PORT : ${PORT} `);
+  console.log(`Server Started at PORT : ${PORT}`);
 });
